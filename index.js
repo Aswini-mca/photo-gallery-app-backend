@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import "dotenv/config";
 import { usersRouter } from "./routes/user.js";
 import { galleryRouter } from "./routes/gallery.js";
+import { isAuthenticated } from "./auth.js";
 
 const app = express();
 const PORT = 9000;
@@ -20,7 +21,7 @@ export async function dataBaseConnection() {
     await mongoose.connect(MONGO_URL, { dbName: DB_NAME });
     console.log("Mongodb is connected");
   } catch (error) {
-    console.log("Mongodb connection error",error);
+    console.log("Mongodb connection error", error);
   }
 }
 dataBaseConnection();
@@ -30,6 +31,6 @@ app.get("/", (req, res) => {
 });
 
 app.use('/user', usersRouter);
-app.use('/gallery',galleryRouter);
+app.use('/gallery', isAuthenticated, galleryRouter);
 
 app.listen(PORT, () => console.log("The server started on the port", PORT));
