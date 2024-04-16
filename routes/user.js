@@ -150,7 +150,7 @@ router.post("/forget-password", async (req, res) => {
     to: email,
     subject: "Password Reset Link",
     text: `random string is${resetToken}`,
-    html: `<h2>The link for reset your password will expire in 1 hour.<a href='https://65d716ad88750687a3d4249b--taupe-belekoy-48d12a.netlify.app/reset-password/${resetToken}'>https://65d716ad88750687a3d4249b--taupe-belekoy-48d12a.netlify.app/reset-password/${resetToken}</a></h2>`,
+    html: `<h2>The link for reset your password will expire in 1 hour.<a href='https://merry-licorice-ef956a.netlify.app/reset-password/${resetToken}'>https://merry-licorice-ef956a.netlify.app/reset-password/${resetToken}</a></h2>`,
   };
 
   transporter.sendMail(sendEmail, (err, info) => {
