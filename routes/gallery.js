@@ -88,4 +88,23 @@ router.delete("/delete-photo/:id", async (req, res) => {
   }
 });
 
+//Api to get a photo by id
+router.get("/photo/:id", async (req, res) => {
+  const {id} = req.params;
+  try {
+    const photo = await Gallery.findById({_id:id});
+    if (photo) {
+      return res.status(202).json({ photo });
+    } else {
+      return res
+        .status(400)
+        .send({ error: "Error occured while getting the photo" });
+    }
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: "Internal Server Error", error: error.message });
+  }
+});
+
 export const galleryRouter = router;
